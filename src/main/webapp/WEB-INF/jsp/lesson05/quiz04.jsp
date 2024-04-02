@@ -17,6 +17,7 @@
 <body>
 	<div class="container">
 		<h1>회원 정보 리스트</h1>
+		<img src="/img/sunny.jpg">
 		<table class="table text-center">
 			<thead>
 				<tr>
@@ -42,11 +43,9 @@
 								유효하지 않은 전화번호
 							</c:otherwise>
 						</c:choose>
-						
-						
 					</td>
 					<td><c:set var="nation" value="${member.nationality}" />
-						${fn:replace(nation, '삼국시대', '삼국-') }
+						${fn:replace(nation, '삼국시대', '삼국 - ') }
 					</td>
 					<td><c:set var="email" value="${member.email}" />
 						<b>${fn:split(email, '@')[0]}</b>@${fn:split(email, '@')[1]}
@@ -54,7 +53,7 @@
 					<td><c:set var="introduce" value="${member.introduce}" />
 						<c:choose>
 							<c:when test="${fn:length(introduce) > 15}">
-								${fn:substring(introduce, 0, 16)}...
+								${fn:substring(introduce, 0, 15)}...
 							</c:when>
 							<c:otherwise>
 								${member.introduce}
