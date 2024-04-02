@@ -33,14 +33,34 @@
 					<c:forEach items="${members}" var="member" varStatus="status">
 					<td>${status.count}</td>
 					<td>${member.name}</td>
-					<td>${member.phoneNumber}</td>
+					<td><c:set var="phoneNumber" value="${member.phoneNumber}" />
+						<c:choose>
+							<c:when test="${fn:startsWith(phoneNumber, '010')}">
+								${member.phoneNumber}
+							</c:when>
+							<c:otherwise>
+								유효하지 않은 전화번호
+							</c:otherwise>
+						</c:choose>
+						
+						
+					</td>
 					<td><c:set var="nation" value="${member.nationality}" />
 						${fn:replace(nation, '삼국시대', '삼국-') }
 					</td>
 					<td><c:set var="email" value="${member.email}" />
 						<b>${fn:split(email, '@')[0]}</b>@${fn:split(email, '@')[1]}
 					</td>
-					<td>${member.introduce}</td>
+					<td><c:set var="introduce" value="${member.introduce}" />
+						<c:choose>
+							<c:when test="${fn:length(introduce) > 15}">
+								${fn:substring(introduce, 0, 16)}...
+							</c:when>
+							<c:otherwise>
+								${member.introduce}
+							</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>
