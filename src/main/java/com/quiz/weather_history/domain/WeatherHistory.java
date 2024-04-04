@@ -13,7 +13,6 @@ public class WeatherHistory {
 	private Date createdAt;
 	private Date updatedAt;
 	
-	
 	public int getId() {
 		return id;
 	}
