@@ -56,6 +56,21 @@ public class Lesson06Quiz01Controller {
 				
 		return "lesson06/bookmarkList";
 	}
+	
+	// 즐겨찾기 중복 검사 - ajax
+	@ResponseBody
+	@PostMapping("/is-duplication-url")
+	public Map<String, Object> isDuplicationUrl(
+			@RequestParam("url") String url) {
+		//db select
+		boolean isDuplication = bookmarkBO.isDuplicationUrl(url);
+		
+		//응답값 json
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("is_duplication", true);
+		return result;
+	}
 }
 
 

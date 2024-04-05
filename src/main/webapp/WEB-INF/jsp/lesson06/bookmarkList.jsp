@@ -20,6 +20,7 @@
 					<th>No</th>
 					<th>제목</th>
 					<th>주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -28,10 +29,21 @@
 					<td>${bookmark.id}</td>
 					<td>${bookmark.name}</td>
 					<td><a href="${bookmark.url}" target="_blank">${bookmark.url}</a></td>
+					<td><button type="button" class="del-btn btn btn-danger">삭제</button></td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	
+	<script>
+		$(document).ready(function() {
+			// 삭제버튼
+			$(".del-btn").on('click', function() {
+				// alert("삭제");
+				
+			})
+		})
+	</script>
 </body>
 </html>

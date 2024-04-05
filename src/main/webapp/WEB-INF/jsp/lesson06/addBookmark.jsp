@@ -20,7 +20,12 @@
 
 		<div class="form-group">
 			<label for="url">URL 주소</label>
-			<input type="text" id="url" class="form-control">
+			<div class="d-flex">
+				<input type="text" id="url" class="form-control col-11">
+				<button type="button" id="duplicationBtn" class="btn btn-info">중복확인</button>
+			</div>
+			<small id="duplicationText" class="text-danger d-none">중복된 URL 입니다.</small>
+			<small id="availableUrlText" class="text-success d-none">저장 가능한 URL 입니다.</small>
 		</div>
 		
 		<button type="button" id="addBtn" class="btn btn-success btn-block">추가</button>
@@ -28,6 +33,44 @@
 	
 <script>
 	$(document).ready(function() {
+		
+		// 중복확인
+		$("#duplicationBtn").on('click', function() {
+			//alert("중복");
+			
+			let url = $("#url").val().trim();
+			if (!url) {
+				alert("주소를 입력하세요.");
+				return;
+			}
+			
+			// AJAX 통신 - DB 확인
+			$.ajax({
+				// request
+				type:"POST"
+				, url:"/lesson06/quiz01/is-duplication-url"
+				, data:{"url":url}
+				
+				// response
+				, success:function(data) {
+					// {"code":200, "is_duplication":true} =>중복
+					if (data.is_duplication) {
+						// 중복
+						$("#duplicationText").removeClass("d-none");
+						$("#availableUrlText").addClass("d-none");
+					} else {
+						// 사용 가능
+						$("#availableUrlText").removeClass("d-none");
+						$("#duplicationText").addClass("d-none");
+					}
+				}
+				, error:function(e) {
+					alert("중복확인에 실패했습니다.");
+				}
+			});
+		});
+		
+		// 추가 버튼
 		$("#addBtn").on('click', function() {
 			//alert("클릭");
 			let name = $("#name").val().trim();
@@ -46,6 +89,12 @@
 			if (url.startsWith("http://") == false
 					&& url.startsWith("https://") == false) {
 				alert("주소 형식이 잘못되었습니다.");
+				return;
+			}
+			
+			// availableUrlText d-none이 있으면=>추가 불가
+			if ($("#availableUrlText").hasClass("d-none")) {
+				alert("url 중복확인을 해주세요.")
 				return;
 			}
 			

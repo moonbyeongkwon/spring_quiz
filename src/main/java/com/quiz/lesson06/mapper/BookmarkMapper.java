@@ -15,6 +15,9 @@ public interface BookmarkMapper {
 			@Param("url") String url);
 	
 	public List<Bookmark> selectBookmarkList();
+	
+	// input: url     output: List<Bookmark>
+	public List<Bookmark> selectBookmarkListByUrl(String url);
 }
 
 
