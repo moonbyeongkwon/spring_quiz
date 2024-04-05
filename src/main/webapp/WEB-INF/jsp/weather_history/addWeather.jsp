@@ -9,11 +9,15 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
+<!-- datepicker -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <link rel="stylesheet" type="text/css" href="/css/weather_history/style.css">
 </head>
 <body>
 	<div id="wrap">
-		<div class="contents">
+		<div class="contents d-flex">
 			<%-- menu --%>
 			<nav class="col-2">
 				<%-- 상단 로고 --%>
@@ -120,5 +124,15 @@
 			</div>
 		</footer>
 	</div>
+	
+	<script>
+		$(document).ready(function() {
+			$("#date").datepicker({
+				dateFormat:"yy-mm-dd"
+			});
+			
+		});
+	
+	</script>
 </body>
 </html>

@@ -1,12 +1,16 @@
 package com.quiz.weather_history;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.quiz.weather_history.bo.WeatherHistoryBO;
 import com.quiz.weather_history.domain.WeatherHistory;
@@ -31,4 +35,24 @@ public class WeatherHistoryController {
 	public String addWeatherView() {
 		return "weather_history/addWeather";
 	}
+	
+	// 날씨 추가
+	@PostMapping("/add-weather")
+	public String addWeather(
+			@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+			@RequestParam("weather") String weather,
+			@RequestParam("microDust") String microDust,
+			@RequestParam("temperatures") double temperatures,
+			@RequestParam("precipitation") double precipitation,
+			@RequestParam("windSpeed") double windSpeed) {
+		
+		// db insert
+		weatherHistoryBO.addWeatherHistory(date, weather, microDust, temperatures, precipitation, windSpeed);
+		
+		// 목록 화면 => 302 redirect
+		return "redirect:/weather-history/weather-history-view";
+	}
 }
+
+
+
