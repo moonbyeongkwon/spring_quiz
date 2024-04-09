@@ -29,7 +29,7 @@
 					<td>${bookmark.id}</td>
 					<td>${bookmark.name}</td>
 					<td><a href="${bookmark.url}" target="_blank">${bookmark.url}</a></td>
-					<td><button type="button" class="del-btn btn btn-danger">삭제</button></td>
+					<td><button type="button" class="del-btn btn btn-danger" data-bookmark-id="${bookmark.id}">삭제</button></td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -38,12 +38,39 @@
 	
 	<script>
 		$(document).ready(function() {
-			// 삭제버튼
-			$(".del-btn").on('click', function() {
-				// alert("삭제");
+			// 삭제 버튼
+			$(".del-btn").on('click', function(e) {
+				//alert("삭제");
+				// 1) button에 넣은 값 가져오기
+				//let id = $(this).val();
+				//let id = $(this).attr('value');
+				//let id = e.target.value;
 				
-			})
-		})
+				// 2) data를 이용해서 값 가져오기
+				let id = $(this).data('bookmark-id');
+				//alert(id);
+				
+				$.ajax({
+					// request
+					type:"delete"
+					, url:"/lesson06/quiz01/delete-bookmark"
+					, data:{"id":id}
+					
+					// response
+					, success:function(data) {
+						// {"code":200, "result":"성공"}
+						if (data.result == "성공") {
+							// 새로고침
+							location.reload();
+						}
+					}
+					, error:function(e) {
+						alert("삭제하는데 실패했습니다.");
+					}
+				});
+			});
+			
+		});
 	</script>
 </body>
 </html>

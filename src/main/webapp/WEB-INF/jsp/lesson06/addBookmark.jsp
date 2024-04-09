@@ -92,9 +92,9 @@
 				return;
 			}
 			
-			// availableUrlText d-none이 있으면=>추가 불가
+			// availableUrlText  d-none이 있으면 => 추가 불가
 			if ($("#availableUrlText").hasClass("d-none")) {
-				alert("url 중복확인을 해주세요.")
+				alert("url 중복확인을 해주세요.");
 				return;
 			}
 			

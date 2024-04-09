@@ -31,7 +31,7 @@
 			`bookmark`
 	</select>
 	
-	<select id="selectBookmarkListByUrl" parameterType="String" resultType="com.quiz.lesson06.domain.Bookmark">
+	<select id="selectBookmarkListByUrl" parameterType="string" resultType="com.quiz.lesson06.domain.Bookmark">
 		SELECT
 			`id`
 			,`name`
@@ -43,6 +43,14 @@
 		WHERE
 			`url` = #{url}
 	</select>
+	
+	<delete id="deleteBookmarkById" parameterType="int">
+		DELETE
+		FROM
+			`bookmark`
+		WHERE
+			`id` = #{id}
+	</delete>
 </mapper>
 
 
