@@ -81,23 +81,23 @@
 				
 				// validation
 				if (!name) {
-					alert("이름을 입력하세요.");
+					alert("이름을 입력하세요");
 					return;
 				}
 				if (!date) {
-					alert("날짜를 선택하세요.");
+					alert("날짜를 선택하세요");
 					return;
 				}
 				if (!day) {
-					alert("숙박일을 입력하세요.");
+					alert("숙박일을 입력하세요");
 					return;
 				}
 				if (!headcount) {
-					alert("숙박인원을 입력하세요.");
+					alert("숙박인원을 입력하세요");
 					return;
 				}
 				if (!phoneNumber) {
-					alert("전화번호를 입력하세요.");
+					alert("전화번호를 입력하세요");
 					return;
 				}
 				
@@ -106,17 +106,16 @@
 					, url:"/booking/make-booking"
 					, data:{"name":name, "date":date, "day":day, "headcount":headcount, "phoneNumber":phoneNumber}
 					, success:function(data) {
-						// {"code:200", "result":"성공"}
+						// {"code":200, "result":"성공"}
 						if (data.code == 200) {
-							alert("예약되었습니다.")
+							alert("예약 되었습니다.");
 							location.href = "/booking/booking-list-view";
 						}
 					}
 					, error:function(e) {
-						alert("예약 실패")
+						alert("예약하는데 실패했습니다.");
 					}
 				});
-				
 			});
 		});
 	</script>

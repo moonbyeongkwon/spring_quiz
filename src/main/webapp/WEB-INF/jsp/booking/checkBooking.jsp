@@ -67,15 +67,52 @@
 	        </small>
 	    </footer>
 	</div>
-	
 	<script>
 		$(document).ready(function() {
 			// 조회하기
 			$("#checkBookingBtn").on('click', function() {
-				let name = 
+				//alert("조회");
+				let name = $("#name").val().trim();
+				let phoneNumber = $("#phoneNumber").val().trim();
+				
+				if (!name) {
+					alert("이름을 입력하세요");
+					return;
+				}
+				
+				if (!phoneNumber) {
+					alert("전화번호를 입력하세요.");
+					return;
+				}
+				
+				$.ajax({
+					type:"POST"
+					, url:"/booking/check-booking"
+					, data:{"name":name, "phoneNumber":phoneNumber}
+					, success:function(data) {
+						if (data.code == 500) {
+							// 예약 내역 없음
+							alert(data.error_message);
+						} else if (data.code == 200) {
+							// 예약 내역 있음
+							alert("이름:" + data.result.name
+									+ "\n날짜:" + data.result.date.slice(0, 10) // 2024-04-09  0~10
+									+ "\n일수:" + data.result.day
+									+ "\n인원:" + data.result.headcount
+									+ "\n상태:" + data.result.state);
+						}
+					}
+					, error:function(e) {
+						alert("조회하는데 실패했습니다.");
+					}
+				});
 			});
-			
 		});
 	</script>
 </body>
 </html>
+
+
+
+
+
